@@ -1,4 +1,4 @@
-package com.izi.er.dto;
+package com.izi.er.controller.dto;
 
 import org.springframework.http.HttpStatus;
 import lombok.Getter;

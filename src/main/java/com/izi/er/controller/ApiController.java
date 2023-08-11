@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
-import com.izi.er.dto.ResponseDto;
-import com.izi.er.dto.TestDto;
-import com.izi.er.dto.InjuryDto;
-import com.izi.er.dto.SignupDto;
-import com.izi.er.dto.LocationDto;
+import com.izi.er.controller.dto.ResponseDto;
+import com.izi.er.controller.dto.TestDto;
+import com.izi.er.controller.dto.InjuryDto;
+import com.izi.er.controller.dto.SignupDto;
+import com.izi.er.controller.dto.LocationDto;
 
 @RestController
 public class ApiController {
@@ -19,7 +19,7 @@ public class ApiController {
         return new ResponseDto<String>("test ok", HttpStatus.OK);
     }
     @PostMapping("/injury")
-    public ResponseDto<String> requestInjury(@RequestBody InjuryDto injuryDto) {
+    public ResponseDto<String> requestInjury(@RequestBody InjuryDto<String, String> injuryDto) {
         return new ResponseDto<String>("", HttpStatus.OK);
     }
     @PostMapping("/signup/process")
