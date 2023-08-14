@@ -9,13 +9,20 @@ import com.izi.er.controller.dto.TestDto;
 import com.izi.er.controller.dto.InjuryDto;
 import com.izi.er.controller.dto.SignupDto;
 import com.izi.er.controller.dto.LocationDto;
+import com.izi.er.service.UserService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 public class ApiController {
+    private final UserService userService;
     @PostMapping("/test")
     public ResponseDto<String> test(@RequestBody TestDto testDto) {
         System.out.println("test id: "+testDto.getId());
         System.out.println("test name: "+testDto.getName());
+
+        System.out.println(userService.encodeTest("test string"));
+
         return new ResponseDto<String>("test ok", HttpStatus.OK);
     }
     @PostMapping("/injury")
