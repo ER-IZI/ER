@@ -1,7 +1,10 @@
 package com.izi.er.service;
 
+import com.izi.er.model.User;
+import com.izi.er.model.type.RoleType;
 import com.izi.er.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 
@@ -10,13 +13,16 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    public String encodeTest(String rawPassword) {
-        String encodedPassword = passwordEncoder.encode(rawPassword);
-        System.out.println("raw: "+rawPassword);
-        System.out.println("enc: "+encodedPassword);
-        System.out.println("same?: "+passwordEncoder.matches(rawPassword, encodedPassword));
-        System.out.println("same?: "+passwordEncoder.matches("other string", encodedPassword));
-
-        return encodedPassword;
+    public void signup(User user) {
+        user.setPassword(passwordEncode(user.getPassword()));
+        user.setRole(RoleType.USER);
+        saveUser(user);
+    }
+    private String passwordEncode(String rawPassword) {
+        return passwordEncoder.encode(rawPassword);
+    }
+    @Transactional
+    private void saveUser(User user) {
+        userRepository.save(user);
     }
 }

@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import com.izi.er.controller.dto.ResponseDto;
 import com.izi.er.controller.dto.TestDto;
+import com.izi.er.controller.dto.LoginDto;
 import com.izi.er.controller.dto.InjuryDto;
 import com.izi.er.controller.dto.SignupDto;
 import com.izi.er.controller.dto.LocationDto;
 import com.izi.er.service.UserService;
+import com.izi.er.model.User;
+import com.izi.er.model.type.UserType;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -18,11 +21,6 @@ public class ApiController {
     private final UserService userService;
     @PostMapping("/test")
     public ResponseDto<String> test(@RequestBody TestDto testDto) {
-        System.out.println("test id: "+testDto.getId());
-        System.out.println("test name: "+testDto.getName());
-
-        System.out.println(userService.encodeTest("test string"));
-
         return new ResponseDto<String>("test ok", HttpStatus.OK);
     }
     @PostMapping("/injury")
@@ -31,7 +29,21 @@ public class ApiController {
     }
     @PostMapping("/signup/process")
     public ResponseDto<String> signup(@RequestBody SignupDto signupDto) {
-        return new ResponseDto<String>("Success Sign up", HttpStatus.OK);
+        User user = new User();
+
+        user.setUsername(signupDto.getUsername());
+        user.setPassword(signupDto.getPassword());
+        user.setType(signupDto.getUserType());
+
+        ResponseDto<String> responseDto = null;
+        try {
+            userService.signup(user);
+            responseDto = new ResponseDto<String>("Success Sign up", HttpStatus.OK);
+        } catch(Exception e) {
+            responseDto = new ResponseDto<String>("Sign up failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+        } finally {
+            return responseDto;
+        }
     }
     @PostMapping("/search-emergency-room/process")
     public ResponseDto<String> findEmerygencyRoom(@RequestBody LocationDto locationDto) {

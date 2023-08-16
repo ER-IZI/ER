@@ -19,6 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(userEntity != null) {
             return new UserDetailsImpl(userEntity);
         }
-        return null;
+        throw new UsernameNotFoundException("Username Not Found");
     }
 }
