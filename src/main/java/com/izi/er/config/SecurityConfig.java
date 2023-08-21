@@ -18,6 +18,10 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeRequests(authorize -> authorize
+                .antMatchers("/admin/test").hasRole("ADMIN")
+                .antMatchers("/ordinary/test").hasAnyRole("ADMIN", "ORDINARY")
+                .antMatchers("/ambulance/test").hasAnyRole("ADMIN", "AMBULANCE")
+                .antMatchers("/hospital/test").hasAnyRole("ADMIN", "HOSPITAL")
                 .antMatchers("/**").permitAll()
             )
             .formLogin(form -> form.disable())

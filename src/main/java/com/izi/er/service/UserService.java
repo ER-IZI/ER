@@ -15,7 +15,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     public void signup(User user) {
         user.setPassword(passwordEncode(user.getPassword()));
-        user.setRole(RoleType.USER);
         saveUser(user);
     }
     private String passwordEncode(String rawPassword) {

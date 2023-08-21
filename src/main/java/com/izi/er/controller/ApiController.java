@@ -12,7 +12,6 @@ import com.izi.er.controller.dto.SignupDto;
 import com.izi.er.controller.dto.LocationDto;
 import com.izi.er.service.UserService;
 import com.izi.er.model.User;
-import com.izi.er.model.type.UserType;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -33,13 +32,17 @@ public class ApiController {
 
         user.setUsername(signupDto.getUsername());
         user.setPassword(signupDto.getPassword());
-        user.setType(signupDto.getUserType());
+        user.setRole(signupDto.getRole());
+        user.setName(signupDto.getName());
+        user.setTelephone(signupDto.getTelephone());
+        user.setAddress(signupDto.getAddress());
 
         ResponseDto<String> responseDto = null;
         try {
             userService.signup(user);
             responseDto = new ResponseDto<String>("Success Sign up", HttpStatus.OK);
         } catch(Exception e) {
+            e.printStackTrace();
             responseDto = new ResponseDto<String>("Sign up failed.", HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
             return responseDto;

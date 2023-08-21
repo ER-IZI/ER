@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Authentication authentication = new JwtAuthentication(principal, tokenOrUri);
             authentication = authenticationManager.authenticate(authentication);
 
-            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            SecurityContext context = SecurityContextHolder.getContext();
             context.setAuthentication(authentication);
 
             Cookie cookie = new Cookie("JWT", (String)authentication.getCredentials());
