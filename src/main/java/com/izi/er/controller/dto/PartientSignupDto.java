@@ -4,7 +4,8 @@ import com.izi.er.model.type.UserType;
 import lombok.Getter;
 
 @Getter
-public class PartientSignupDto {
+public class PartientSignupDto {//환자 회원가입
+
     private String username; // 아이디
     private String password; // 패스워드
     private String PName; // 환자 이름

@@ -2,7 +2,7 @@ package com.izi.er.model;
 
 import lombok.*;
 import javax.persistence.*;
-import com.izi.er.model.type.RoleType;
+
 import com.izi.er.model.type.UserType;
 
 @Data
@@ -21,7 +21,7 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private RoleType role;
+    private UserType role;
 
     @Enumerated(EnumType.STRING)
     private UserType type;

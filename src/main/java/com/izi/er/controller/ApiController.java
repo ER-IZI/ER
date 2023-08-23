@@ -8,7 +8,7 @@ import com.izi.er.controller.dto.ResponseDto;
 import com.izi.er.controller.dto.TestDto;
 import com.izi.er.controller.dto.InjuryDto;
 import com.izi.er.controller.dto.PartientSignupDto;
-import com.izi.er.controller.dto.LocationDto;
+import com.izi.er.controller.dto.Data.Location;
 import com.izi.er.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +34,7 @@ public class ApiController {
         return new ResponseDto<String>("Success Sign up", HttpStatus.OK);
     }
     @PostMapping("/search-emergency-room/process")
-    public ResponseDto<String> findEmerygencyRoom(@RequestBody LocationDto locationDto) {
+    public ResponseDto<String> findEmerygencyRoom(@RequestBody Location locationDto) {
         return new ResponseDto<String>("find emergency room", HttpStatus.OK);
     }
 }
