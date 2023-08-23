@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import com.izi.er.controller.dto.ResponseDto;
 import com.izi.er.controller.dto.TestDto;
 import com.izi.er.controller.dto.InjuryDto;
-import com.izi.er.controller.dto.SignupDto;
+import com.izi.er.controller.dto.PartientSignupDto;
 import com.izi.er.controller.dto.LocationDto;
 import com.izi.er.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class ApiController {
         return new ResponseDto<String>("", HttpStatus.OK);
     }
     @PostMapping("/signup/process")
-    public ResponseDto<String> signup(@RequestBody SignupDto signupDto) {
+    public ResponseDto<String> signup(@RequestBody PartientSignupDto signupDto) {
         return new ResponseDto<String>("Success Sign up", HttpStatus.OK);
     }
     @PostMapping("/search-emergency-room/process")
